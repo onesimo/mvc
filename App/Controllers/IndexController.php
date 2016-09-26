@@ -2,20 +2,23 @@
 namespace App\Controllers;
 
 use SON\Controller\Action;
+use SON\DI\Container;
+ 
 
 class IndexController extends Action
-{
-	 
-
+{  
 	public function index()
 	{
-		$this->views->cars = array("Mustang", "Ferrari", "Lamborghini");
+		$client = Container::getModel("Client");
+		$this->views->clients = $client->fetchAll();
 		$this->render("index");
 	}
 
 	public function contact()
 	{	
-		$this->views->cars = array("Mustang", "Ferrari","Lamborghini");
+		$client = Container::getModel("Client");
+		$this->views->clients = $client->find(1);
+		 
 		$this->render("contact");
 	}
 
